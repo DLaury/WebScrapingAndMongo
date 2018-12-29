@@ -10,23 +10,56 @@
 
 <body>
     <div class="container">
-
         <div class="jumbotron text-center">
             <h1>Mission to Mars</h1>
+            <!-- Creat button that utilizes /scrape function from app.py -->
             <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
         </div>
-
-        <!-- Craigslist Listings -->
         <div class="row" id="mars_news">
             <div class="col-md-12">
                 <h3 class="heading">Latest Mars News</h3>
-                <h4>{{mars_data.news_title}}</h4>
-                <p>{{mars.news_par[0]}}</p>
+                <!-- Use title and paragraph from database -->
+                <h4>{{mars.news_title}}</h4>
+                <p>{{mars.news_par}}</p>
             </div>
         </div>
-
+        <div class="row" id="Featured_image_weather_and_table">
+            <div class="col-md-8">
+                <h3 class="heading">Featured Mars Image</h3>
+                <!-- Use database information as source link -->
+                <img src={{mars.feat_img}} class='img-responsive img-rounded' alt='Featured Mars Image'>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4>Current Weather on Mars</h4>
+                        <p>{{mars.weather}}</p>
+                    </div>
+                </div>
+                <div>
+                    <h4>Mars Facts</h4>
+                    <!-- Allow to read html information from variable -->
+                    {{ mars.table|safe }}
+                </div>
+            </div>
+        </div>
+        <div class="row" id="mars_hemispheres">
+            <h3 class="text-center">Mars Hemispheres</h3>
+            <hr>
+            <!-- Loop through dictionary within database -->
+            {% for hemisphere in mars.hemispheres %}
+            <div class="col-md-6">
+                <div class="card">
+                    <!-- Use database information as source link and heading of card -->
+                    <img class="card-img-top img-responsive img-rounded" src={{hemisphere.image_url}} alt={{hemisphere.title}}>
+                    <div class="card-body">
+                        <h4 class="card-title">{{hemisphere.title}}</h4>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-
 </body>
 
 </html>

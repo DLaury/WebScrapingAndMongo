@@ -17,22 +17,17 @@ def scrape():
     # Retrieve all of the titles on the web page
     titles = soup.find_all('div', class_="content_title")
 
-    # Create list variable to store titles
-    news_title = []
-
-    # Loop over titles and append them to a list
-    for title in titles:
-        news_title.append(title.find('a').text.strip())
+    # Write first title to news_title variable
+    news_title = titles[0].text.strip()
     
     # Find all paragraphs on web page
     paragraphs = soup.find_all('div', class_="rollover_description_inner")
 
-    # Create list to store all paragraph items
-    news_p = []
+    # Find all paragraphs on web page
+    paragraphs = soup.find_all('div', class_="rollover_description_inner")
 
-    # Loop over paragraphs and append to list
-    for paragraph in paragraphs:
-        news_p.append(paragraph.text.strip())
+    # Add first paragraph to news_p variable
+    news_p = paragraphs[0].text.strip()
 
     # Create executable path for future use
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
@@ -130,7 +125,7 @@ def scrape():
 
     mars_data = {
         'news_title': news_title,
-        'news_pic': news_p,
+        'news_par': news_p,
         'feat_img': featured_image_url,
         'weather': mars_weather,
         'table': html_table,
