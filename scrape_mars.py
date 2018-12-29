@@ -136,3 +136,5 @@ def scrape():
         'table': html_table,
         'hemispheres': hemisphere_image_urls
     }
+
+    return mars_data
